@@ -1,0 +1,242 @@
+local Decode = clonefunction(base64.decode)
+local WaterMark = Instance.new("ScreenGui")
+local BG = Instance.new("Frame")
+local UIListLayout = Instance.new("UIListLayout")
+local Inner = Instance.new("Frame")
+local UIStroke = Instance.new("UIStroke")
+local name = Instance.new("TextLabel")
+local G = Instance.new("TextLabel")
+local GameName = Instance.new("TextLabel")
+local F = Instance.new("TextLabel")
+local FPS = Instance.new("TextLabel")
+local P = Instance.new("TextLabel")
+local Ping = Instance.new("TextLabel")
+local T = Instance.new("TextLabel")
+local Time = Instance.new("TextLabel")
+local UIStroke_2 = Instance.new("UIStroke")
+
+WaterMark.Name = "WaterMark"
+WaterMark.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+WaterMark.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local dragInput
+local dragStart
+local startPos
+local dragging = false
+
+BG.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = BG.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+BG.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        dragInput = input
+    end
+end)
+
+game:GetService(Decode("VXNlcklucHV0U2VydmljZQ==")).InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        local delta = input.Position - dragStart
+        BG.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
+
+BG.Name = "BG"
+BG.Parent = WaterMark
+BG.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+BG.BorderColor3 = Color3.fromRGB(161, 0, 219)
+BG.BorderSizePixel = 0
+BG.Position = UDim2.new(0.0664791465, 0, 0.045608107, 0)
+BG.Size = UDim2.new(0, 402, 0, 29)
+
+UIListLayout.Parent = BG
+UIListLayout.FillDirection = Enum.FillDirection.Horizontal
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+
+Inner.Name = "Inner"
+Inner.Parent = BG
+Inner.BackgroundColor3 = Color3.fromRGB(19, 19, 19)
+Inner.BorderColor3 = Color3.fromRGB(26, 26, 26)
+Inner.BorderSizePixel = 0
+Inner.Position = UDim2.new(0.0136815924, 0, 0.103448279, 0)
+Inner.Size = UDim2.new(0, 396, 0, 23)
+
+UIStroke.Color = Color3.fromRGB(38, 38, 38)
+UIStroke.Parent = Inner
+
+name.Name = "name"
+name.Parent = Inner
+name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+name.BackgroundTransparency = 1.000
+name.BorderColor3 = Color3.fromRGB(0, 0, 0)
+name.BorderSizePixel = 0
+name.Position = UDim2.new(-0.041686859, 0, 0.0549999736, 0)
+name.Size = UDim2.new(0, 119, 0, 19)
+name.Font = Enum.Font.SourceSans
+name.Text = "Beamed.Xyz"
+name.TextColor3 = Color3.fromRGB(161, 0, 219)
+name.TextSize = 16.000
+
+G.Name = "G"
+G.Parent = Inner
+G.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+G.BackgroundTransparency = 1.000
+G.BorderColor3 = Color3.fromRGB(0, 0, 0)
+G.BorderSizePixel = 0
+G.Position = UDim2.new(0.140050516, 0, 0.108695485, 0)
+G.Size = UDim2.new(0, 96, 0, 17)
+G.Font = Enum.Font.SourceSans
+G.Text = "| Game -"
+G.TextColor3 = Color3.fromRGB(102, 102, 102)
+G.TextSize = 14.000
+
+GameName.Name = "GameName"
+GameName.Parent = Inner
+GameName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+GameName.BackgroundTransparency = 1.000
+GameName.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GameName.BorderSizePixel = 0
+GameName.Position = UDim2.new(0.316650152, 0, 0.108695485, 0)
+GameName.Size = UDim2.new(0, 72, 0, 19)
+GameName.Font = Enum.Font.SourceSans
+GameName.Text = "Trident Survival"
+GameName.TextColor3 = Color3.fromRGB(161, 0, 219)
+GameName.TextSize = 14.000
+
+F.Name = "F"
+F.Parent = Inner
+F.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+F.BackgroundTransparency = 1.000
+F.BorderColor3 = Color3.fromRGB(0, 0, 0)
+F.BorderSizePixel = 0
+F.Position = UDim2.new(0.478266329, 0, 0.108695485, 0)
+F.Size = UDim2.new(0, 59, 0, 19)
+F.Font = Enum.Font.SourceSans
+F.Text = "| FPS - "
+F.TextColor3 = Color3.fromRGB(102, 102, 102)
+F.TextSize = 14.000
+
+FPS.Name = "FPS"
+FPS.Parent = Inner
+FPS.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+FPS.BackgroundTransparency = 1.000
+FPS.BorderColor3 = Color3.fromRGB(0, 0, 0)
+FPS.BorderSizePixel = 0
+FPS.Position = UDim2.new(0.552979827, 0, 0.0549999736, 0)
+FPS.Size = UDim2.new(0, 46, 0, 22)
+FPS.Font = Enum.Font.SourceSans
+FPS.Text = "120"
+FPS.TextColor3 = Color3.fromRGB(161, 0, 219)
+FPS.TextSize = 14.000
+
+P.Name = "P"
+P.Parent = Inner
+P.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+P.BackgroundTransparency = 1.000
+P.BorderColor3 = Color3.fromRGB(0, 0, 0)
+P.BorderSizePixel = 0
+P.Position = UDim2.new(0.617999971, 0, 0.108999997, 0)
+P.Size = UDim2.new(0, 60, 0, 18)
+P.Font = Enum.Font.SourceSans
+P.Text = "| Ping - "
+P.TextColor3 = Color3.fromRGB(102, 102, 102)
+P.TextSize = 14.000
+
+Ping.Name = "Ping"
+Ping.Parent = Inner
+Ping.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Ping.BackgroundTransparency = 1.000
+Ping.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Ping.BorderSizePixel = 0
+Ping.Position = UDim2.new(0.709090948, 0, 0.0549999736, 0)
+Ping.Size = UDim2.new(0, 33, 0, 22)
+Ping.Font = Enum.Font.SourceSans
+Ping.Text = "60"
+Ping.TextColor3 = Color3.fromRGB(161, 0, 219)
+Ping.TextSize = 14.000
+
+T.Name = "T"
+T.Parent = Inner
+T.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+T.BackgroundTransparency = 1.000
+T.BorderColor3 = Color3.fromRGB(0, 0, 0)
+T.BorderSizePixel = 0
+T.Position = UDim2.new(0.769515157, 0, 0.0549999736, 0)
+T.Size = UDim2.new(0, 39, 0, 21)
+T.Font = Enum.Font.SourceSans
+T.Text = "| Time - "
+T.TextColor3 = Color3.fromRGB(102, 102, 102)
+T.TextSize = 14.000
+
+Time.Name = "Time"
+Time.Parent = Inner
+Time.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Time.BackgroundTransparency = 1.000
+Time.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Time.BorderSizePixel = 0
+Time.Position = UDim2.new(0.845525205, 0, 0.0549999736, 0)
+Time.Size = UDim2.new(0, 61, 0, 22)
+Time.Font = Enum.Font.SourceSans
+Time.Text = "00-00-00" -- Initial time
+Time.TextColor3 = Color3.fromRGB(161, 0, 219)
+Time.TextSize = 14.000
+
+UIStroke_2.Color = Color3.fromRGB(161, 0, 219)
+UIStroke_2.Thickness = 1.600000023841858
+UIStroke_2.Parent = BG
+
+local function UpdateGameName()
+    local currentGameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+    GameName.Text = currentGameName
+end
+
+UpdateGameName()
+
+game:GetService("Players").LocalPlayer.OnTeleport:Connect(UpdateGameName)
+
+local function UpdateFPS()
+    local fps = 1 / game:GetService("RunService").RenderStepped:Wait()
+    FPS.Text = math.floor(fps)
+end
+
+UpdateFPS()
+
+spawn(function()
+    while true do
+        UpdateFPS()
+        wait(3)
+    end
+end)
+
+local function UpdateTime()
+    local clockTime = game.Lighting.ClockTime
+    local hours = math.floor(clockTime)
+    local minutes = math.floor((clockTime - hours) * 60)
+    local seconds = math.floor(((clockTime - hours) * 60 - minutes) * 60)
+    local formattedTime = string.format("%02d-%02d-%02d", hours, minutes, seconds)
+    Time.Text = formattedTime
+end
+
+UpdateTime()
+
+local function MainLoop()
+    while true do
+        UpdateTime()
+        wait(3) 
+    end
+end
+
+coroutine.wrap(MainLoop)()
+
